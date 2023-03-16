@@ -30,5 +30,11 @@
     "page": "options/options.html",
     "browser_style": true
 
+  },
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "apezord-woofwallet@proton.me"
+    }
   }
 }
