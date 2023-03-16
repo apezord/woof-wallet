@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Woof Wallet Beta",
+  "name": "Woof Wallet",
   "version": "0.9",
 
   "description": "Send and receive doginals using Woof Wallet",
@@ -22,12 +22,19 @@
 
   "action": {
     "default_icon": "icons/icon-32.png",
-    "default_title": "Woof Wallet Beta",
+    "default_title": "Woof Wallet",
     "default_popup": "popup/popup.html"
   },
 
   "options_ui": {
     "page": "options/options.html",
     "browser_style": true
+
+  },
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "apezord-woofwallet@proton.me"
+    }
   }
 }

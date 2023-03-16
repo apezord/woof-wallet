@@ -12,7 +12,7 @@ class Model {
     constructor() {
         this.hasAllPermissions = undefined
         this.credentials = undefined
-        this.acceptedBeta = undefined
+        this.acceptedTerms = undefined
         this.numUnconfirmed = undefined
         this.utxos = undefined
         this.inscriptions = undefined
@@ -54,7 +54,7 @@ class Model {
     async load() {
         await this.loadPermissions()
 
-        const values = await browser.storage.local.get(["privkey", "mnemonic", "derivation", "accepted_beta", "utxos"])
+        const values = await browser.storage.local.get(["privkey", "mnemonic", "derivation", "accepted_terms", "utxos"])
 
         if (values.privkey) {
             this.credentials = {
@@ -64,15 +64,15 @@ class Model {
             }
         }
 
-        this.acceptedBeta = values.accepted_beta
+        this.acceptedTerms = values.accepted_terms
 
         this.utxos = values.utxos
     }
 
 
-    async acceptBeta() {
-        await browser.storage.local.set({ accepted_beta: true })
-        this.acceptedBeta = true
+    async acceptTerms() {
+        await browser.storage.local.set({ accepted_terms: true })
+        this.acceptedTerms = true
     }
 
 

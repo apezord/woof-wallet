@@ -12,8 +12,8 @@ model.load().then(reloadWallet)
 function reloadWallet() {
     if (!model.hasAllPermissions) {
         showGrantPermissionsPage()
-    } else if (!model.acceptedBeta) {
-        showAcceptBetaPage()
+    } else if (!model.acceptedTerms) {
+        showAcceptTermsPage()
     } else if (model.credentials) {
         showViewWalletPage()
     } else {
@@ -32,12 +32,11 @@ function showGrantPermissionsPage() {
 }
 
 
-function showAcceptBetaPage() {
-    showPage("accept_beta_page")
+function showAcceptTermsPage() {
+    showPage("accept_terms_page")
 
-    $("#accept_beta_button").onclick = async () => {
-        await model.requestPermissions()
-        await model.acceptBeta()
+    $("#accept_terms_button").onclick = async () => {
+        await model.acceptTerms()
         reloadWallet()
     }
 }

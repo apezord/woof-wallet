@@ -45,7 +45,7 @@ button:disabled {
     cursor: not-allowed;
 }
 
-#beta_terms {
+#terms {
     font-size: 0.95em;
     color: #555;
     margin-left: 15px;
