@@ -143,8 +143,8 @@ function showViewWalletPage() {
                 if (model.numUnconfirmed > 0) {
                     const pending = document.createElement("div")
                     pending.classList.add("pending")
-                    const suf = num_pending > 1 ? 's' : ''
-                    pending.innerHTML = `${num_pending} unconfirmed transaction${suf}...`
+                    const suf = model.numUnconfirmed > 1 ? 's' : ''
+                    pending.innerHTML = `${model.numUnconfirmed} unconfirmed transaction${suf}...`
                     $("#doginals").appendChild(pending)
                 }
 
@@ -192,7 +192,17 @@ function showViewWalletPage() {
                     i++
                 }
             } else {
-                $("#doginals").innerHTML = "No doginals"
+                $("#doginals").innerHTML = ""
+
+                if (model.numUnconfirmed > 0) {
+                    const pending = document.createElement("div")
+                    pending.classList.add("pending")
+                    const suf = model.numUnconfirmed > 1 ? 's' : ''
+                    pending.innerHTML = `${model.numUnconfirmed} unconfirmed transaction${suf}...`
+                    $("#doginals").appendChild(pending)
+                } else {
+                    $("#doginals").innerHTML = "No doginals"
+                }
             }
         })
     })

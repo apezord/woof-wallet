@@ -137,8 +137,11 @@ class Model {
                 })
 
                 // filter out unconfirmed because they wont be indexed
-                const numUnconfirmed = utxos.filter(x => x.confirmations == 0)
+                const unconfirmedUtxos = utxos.filter(x => !x.confirmations)
                 const confirmedUtxos = utxos.filter(x => x.confirmations > 0)
+
+                this.numUnconfirmed = unconfirmedUtxos.length
+                this.utxos = confirmedUtxos
 
                 // check if these utxos are the same
                 if (JSON.stringify(confirmedUtxos) == JSON.stringify(this.utxos)) {
@@ -153,8 +156,6 @@ class Model {
                 if (resp3.status != 200) throw new Error("doginals.com is out of sync")
                 
                 // save them for next time
-                this.numUnconfirmed = numUnconfirmed
-                this.utxos = confirmedUtxos
                 await browser.storage.local.set({ utxos: confirmedUtxos })
 
                 return
