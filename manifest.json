@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "Woof Wallet Beta",
+  "version": "0.9",
+
+  "description": "Send and receive doginals using Woof Wallet",
+  "homepage_url": "https://github.com/apezord/doginals-extension",
+  "icons": {
+    "48": "icons/icon-48.png"
+  },
+
+  "permissions": [
+    "storage",
+    "unlimitedStorage"
+  ],
+
+  "host_permissions": [
+    "*://dogechain.info/*",
+    "*://doginals.com/*",
+    "*://api.blockchair.com/*"
+  ],
+
+  "action": {
+    "default_icon": "icons/icon-32.png",
+    "default_title": "Woof Wallet Beta",
+    "default_popup": "popup/popup.html"
+  },
+
+  "options_ui": {
+    "page": "options/options.html",
+    "browser_style": true
+  }
+}

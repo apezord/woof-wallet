@@ -1,0 +1,251 @@
+body {
+    background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(128,248,174,1) 0%, rgba(223,244,148,1) 90% );
+    font-family: 'Comic Neue', cursive;
+    color: white;
+    width: 300px;
+    height: 400px;
+    margin: 0px;
+    font-size: 16px;
+}
+
+h1 {
+    font-size: 32px;
+}
+
+h2 {
+    font-size: 24px;
+}
+
+.page {
+    width: 100%;
+    height: 100%;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+}
+
+button {
+    width: 80%;
+    border: 2px;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 0px 20px 20px 20px;
+    background-image: linear-gradient( 109.6deg,  rgba(255,179,189,1) 1.8%, rgba(254,248,154,1) 50.6%, rgba(161,224,186,1) 100.3% );
+    color: #666;
+    font-size: 1.1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+#beta_terms {
+    font-size: 0.95em;
+    color: #555;
+    margin-left: 15px;
+    margin-right: 15px;
+    flex: 1;
+}
+
+.setup_option {
+    flex: 1;
+}
+    
+#mnemonic {
+    width: 80%;
+    flex: 1;
+    font-size: 1.3em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+textarea {
+    width: 80%;
+    font-size: 1.3em;
+    flex: 1;
+    margin-bottom: 20px;
+    resize: none;
+}
+
+#header {
+    background-image: linear-gradient( 67.2deg,  rgba(37,208,199,1) -7.5%, rgba(165,90,240,1) 62.7% );
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+.header_row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#address {
+    font-size: 0.8em;
+    flex: 1;
+    padding: 10px;
+}
+
+#copy_address_button {
+    border-radius: 0px;
+    background-size: contain;
+    background-image: url(images/copy_to_clipboard.png);
+    background-color: transparent;
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
+    padding: 0px;
+    margin: 0px;
+    margin-right: 10px;
+}
+
+#doginals {
+    margin: 0px;
+    padding: 0px;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: safe center;
+    justify-content: safe start;
+    flex: 1;
+    width: 100%;
+    overflow: auto;
+}
+
+.doginals_row {
+    padding: 0px;
+    margin-bottom: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+}
+
+.pending {
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.doginal {
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 120px;
+    height: 120px;
+    background-image: radial-gradient( circle 957px at 8.7% 50.5%,  rgba(246,191,13,1) 0%, rgba(249,47,47,1) 90% );
+    background-size: contain;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.doginals_row_spacer {
+    width: 10px;
+}
+
+#view_doginal_page {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap: 10px;
+}
+
+#doginal_content {
+    width: 200px;
+    height: 200px;
+    background-image: radial-gradient( circle 957px at 8.7% 50.5%,  rgba(246,191,13,1) 0%, rgba(249,47,47,1) 90% );
+    background-size: contain;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+#doginal_send_button {
+    margin-bottom: 0px;
+}
+
+#doginal_inscription_id {
+    font-size: 0.5em;
+}
+
+.inscription_text {
+    text-align: left !important;
+    align-items: start !important;
+    justify-content: start !important;
+}
+
+#error_page {
+    background-image: radial-gradient( circle 860px at 11.8% 33.5%,  rgba(240,30,92,1) 0%, rgba(244,49,74,1) 30.5%, rgba(249,75,37,1) 56.1%, rgba(250,88,19,1) 75.6%, rgba(253,102,2,1) 100.2% );
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+}
+
+#error_message {
+    text-align: center;
+    padding: 10px;
+    margin: 0px;
+    width: 80%;
+}
+
+#sent_txid {
+    font-size: 0.5em;
+}
+
+#doginal_inscription_number {
+    color: #555;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+#doginal_inscription_id {
+    color: #555;
+}
+
+input[type=text] {
+    width: 200px;
+    border-radius: 20px;
+    border: 1px solid #2d9fd9;
+    color: #a0d18c;
+    height: 30px;
+    padding-left: 10px;
+}
+    
+input[type=text]:focus {
+     outline: none;
+     border: 1px solid #a0d18c;
+     color: #2d9fd9;
+}

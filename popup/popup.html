@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <meta charset="utf-8" />
+
+        <link rel="stylesheet" href="popup.css" />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Comic+Neue&display=swap" rel="stylesheet">
+    </head>
+
+    <body>
+        <!-- ACCEPT THE PERMISSIONS -->
+        <div id="grant_permissions_page" class="page">
+            <h1>Permissions</h1>
+            <div id="beta_terms">
+                <p>Woof Wallet needs your permission to access some APIs:</p>
+                <ol>
+                    <li>dogechain.info to query your utxos</li>
+                    <li>doginals.com to query your ordinals</li>
+                    <li>api.blockchair.com to broadcast transactions</li>
+                </ol>
+                <p>The browser will show a pop-up when you click Request.</p>
+            </div>
+            <button id="accept_permissions_button">Request</button>
+        </div>
+
+
+        <!-- ACCEPT THE BETA -->
+        <div id="accept_beta_page" class="page">
+            <h1>Legal stuff</h1>
+            <div id="beta_terms">
+                <p>
+                    By using Woof Wallet Beta, you agree:
+                    <ol>
+                        <li>There may still be bugs or security vulnerabilities.</li>
+                        <li>Funds or NFTs could be lost.</li>
+                        <li>You will not store more than you are willing can lose.</li>
+                        <li>You use it at your own risk. The author is not responsible for losses.</li>
+                        <li>The author may update it anytime.</li>
+                        <li>Your will secure your private keys and other credentials.</li>
+                    </ol>
+                </p>
+            </div>
+            <button id="accept_beta_button">Woof</button>
+        </div>
+
+
+        <!-- MAKE A NEW WALLET -->
+        <div id="setup_page" class="page">
+            <h1>Set up stuff</h1>
+            <button id="new_wallet_button" class="setup_option">I don't have a wallet</button>
+            <button id="import_wallet_button" class="setup_option">I already have a wallet</button>
+        </div>
+
+
+        <!-- GENERATE KEYS FOR A NEW WALLET -->
+        <div id="create_page" class="page">
+            <h1>Write this down</h1>
+            <div id="mnemonic"></div>
+            <button id="create_wallet_ok_button">OK I did</button>
+        </div>
+
+
+        <!-- IMPORT KEYS FROM AN EXISTING WALLET -->
+        <div id="import_page" class="page">
+            <h1>How to import</h1>
+            <button id="import_private_key_button" class="setup_option">I have a private key</button>
+            <button id="import_twelve_words_button" class="setup_option">I have 12 words</button>
+        </div>
+
+
+        <!-- IMPORT A PRIVATE KEY -->
+        <div id="import_private_key_page" class="page">
+            <h1>Paste your key</h1>
+            <textarea id="private_key_textarea"></textarea>
+            <button id="load_private_key_button">Load</button>
+        </div>
+
+
+        <!-- IMPORT A MNEMONIC -->
+        <div id="import_twelve_words_page" class="page">
+            <h1>Type your 12 words</h1>
+            <textarea id="twelve_words_textarea"></textarea>
+            <button id="load_twelve_words_button">Load</button>
+        </div>
+
+
+        <!-- VIEW ALL DOGINALS -->
+        <div id="view_wallet_page" class="page">
+            <div id="header">
+                <div class="header_row">
+                    <div id="address"></div>
+                    <button id="copy_address_button" title="Copy address to clipboard"></button>
+                </div>
+                <div class="header_row">
+                    <span id="doge_balance">Loading...</span>
+                </div>
+            </div>
+            <div id="doginals">
+                Loading...
+            </div>
+        </div>
+
+
+        <!-- VIEW A SPECIFIC DOGINAL -->
+        <div id="view_doginal_page" class="page">
+            <span id="doginal_inscription_number"></span>
+            <div id="doginal_content"></div>
+            <input id="doginal_address_input" placeholder="Enter address here" type="text"></input>
+            <button id="doginal_send_button">Send</button>
+        </div>
+
+
+        <!-- AFTER SEND SCREEN -->
+        <div id="sent_page" class="page">
+            <h1 id="sent_message"></h1>
+            <span id="sent_txid"></span>
+        </div>
+
+
+        <!-- ERROR SCREEN -->
+        <div id="error_page" class="page">
+            <h1>Bad shibe</h1>
+            <span id="error_message"></span>
+        </div>
+    </body>
+
+    <script src="lib/bitcore-lib-doge.js"></script>
+    <script src="lib/bitcore-mnemonic.js"></script>
+    <script src="lib/browser-polyfill.min.js"></script>
+
+    <script src="model.js"></script>
+    <script src="popup.js"></script>
+
+</html>
