@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Woof Wallet",
-  "version": "0.9.1",
+  "version": "0.9.2",
 
   "description": "Send and receive doginals using Woof Wallet",
   "homepage_url": "https://github.com/apezord/doginals-extension",
