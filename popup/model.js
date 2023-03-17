@@ -108,63 +108,76 @@ class Model {
 
 
     async refreshUtxos() {
-        for (let retry = 0; retry < NUM_RETRIES; retry++) {
-            try {
-                // query latest utxos
-                const address = this.credentials.privateKey.toAddress().toString()
-                const resp = await fetch(`https://dogechain.info/api/v1/address/unspent/${address}`)
-                const json = await resp.json()
-                if (!json.success) throw new Error('dogechain.info error')
+        let utxos = []
+        let round = 1
+        let done = false
 
-                // convert response to our utxo format
-                const utxos = json.unspent_outputs.map(unspent_output => {
-                    return {
-                        txid: unspent_output.tx_hash,
-                        vout: unspent_output.tx_output_n,
-                        script: unspent_output.script,
-                        satoshis: unspent_output.value,
-                        confirmations: unspent_output.confirmations
+        while (!done) {
+            for (let retry = 0; retry < NUM_RETRIES; retry++) {
+                try {
+                    // query latest utxos
+                    const address = this.credentials.privateKey.toAddress().toString()
+                    const resp = await fetch(`https://dogechain.info/api/v1/address/unspent/${address}/${round}`)
+                    const json = await resp.json()
+                    if (!json.success) throw new Error('dogechain.info error')
+
+                    // convert response to our utxo format
+                    const partial_utxos = json.unspent_outputs.map(unspent_output => {
+                        return {
+                            txid: unspent_output.tx_hash,
+                            vout: unspent_output.tx_output_n,
+                            script: unspent_output.script,
+                            satoshis: unspent_output.value,
+                            confirmations: unspent_output.confirmations
+                        }
+                    })
+
+                    if (partial_utxos.length == 0) {
+                        done = true
                     }
-                })
 
-                // sort in order of newest to oldest
-                utxos.sort((a, b) => (a.confirmations || 0) - (b.confirmations || 0))
+                    partial_utxos.forEach(utxo => utxos.push(utxo))
 
-                // log the utxos
-                console.log('utxos:')
-                utxos.forEach(utxo => {
-                    console.log(utxo.txid + ":" + utxo.vout + ` (sats=${utxo.satoshis} confs=${utxo.confirmations})`)
-                })
-
-                // filter out unconfirmed because they wont be indexed
-                const unconfirmedUtxos = utxos.filter(x => !x.confirmations)
-                const confirmedUtxos = utxos.filter(x => x.confirmations > 0)
-
-                this.numUnconfirmed = unconfirmedUtxos.length
-                this.utxos = confirmedUtxos
-
-                // check if these utxos are the same
-                if (JSON.stringify(confirmedUtxos) == JSON.stringify(this.utxos)) {
-                    return
+                    round += 1
+                    break
                 }
-
-                // check that the utxos are in sync with indexer
-                const resp2 = await fetch("https://dogechain.info/api/v1/block/besthash")
-                const json2 = await resp2.json()
-                if (!json2.success) throw new Error('bad request')
-                const resp3 = await fetch(`https://doginals.com/block/${json2.hash}`)
-                if (resp3.status != 200) throw new Error("doginals.com is out of sync")
-                
-                // save them for next time
-                await browser.storage.local.set({ utxos: confirmedUtxos })
-
-                return
-            }
-            catch (e) {
-                console.error(e)
-                if (retry == NUM_RETRIES - 1) throw e
+                catch (e) {
+                    console.error(e)
+                    if (retry == NUM_RETRIES - 1) throw e
+                }
             }
         }
+
+        // sort in order of newest to oldest
+        utxos.sort((a, b) => (a.confirmations || 0) - (b.confirmations || 0))
+
+        // log the utxos
+        console.log('utxos:')
+        utxos.forEach(utxo => {
+            console.log(utxo.txid + ":" + utxo.vout + ` (sats=${utxo.satoshis} confs=${utxo.confirmations})`)
+        })
+
+        // filter out unconfirmed because they wont be indexed
+        const unconfirmedUtxos = utxos.filter(x => !x.confirmations)
+        const confirmedUtxos = utxos.filter(x => x.confirmations > 0)
+
+        this.numUnconfirmed = unconfirmedUtxos.length
+        this.utxos = confirmedUtxos
+
+        // check if these utxos are the same
+        if (JSON.stringify(confirmedUtxos) == JSON.stringify(this.utxos)) {
+            return
+        }
+
+        // check that the utxos are in sync with indexer
+        const resp2 = await fetch("https://dogechain.info/api/v1/block/besthash")
+        const json2 = await resp2.json()
+        if (!json2.success) throw new Error('bad request')
+        const resp3 = await fetch(`https://doginals.com/block/${json2.hash}`)
+        if (resp3.status != 200) throw new Error("doginals.com is out of sync")
+        
+        // save them for next time
+        await browser.storage.local.set({ utxos: confirmedUtxos })
     }
 
 
